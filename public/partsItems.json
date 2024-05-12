@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "HDD",
+        "img": "https://i.postimg.cc/bvr9FQRz/pexels-bohed-117729.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Semi Conductor",
+        "img": "https://i.postimg.cc/XvPkMp29/pexels-chengxin-zhao-1218017-15470542.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Processor",
+        "img": "https://i.postimg.cc/ZKmFhkLs/pexels-pok-rie-33563-1432680.jpg"
+    },
+    {
+        "id": 4,
+        "name": "RAM",
+        "img": "https://i.postimg.cc/zGtnWyY4/pexels-zeleboba-6373758.jpg"
+    }
+]

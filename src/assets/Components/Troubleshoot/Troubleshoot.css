@@ -1,0 +1,24 @@
+.chat-container {
+    position: relative;
+  }
+  
+  .chat-bubble {
+    position: relative; /* Use relative positioning */
+    opacity: 0; /* Initially hide the chat bubbles */
+    animation: slideIn 0.1s forwards; /* Apply slide-in animation */
+    padding: 10px; /* Add padding to create space between chat bubbles */
+  }
+  
+  @keyframes slideIn {
+    from {
+      transform: translateY(-100px); /* Start position above the container */
+      opacity: 0; /* Start with opacity 0 */
+    }
+    to {
+      transform: translateY(0); /* End position at the top */
+      opacity: 1; /* Fully visible */
+    }
+  }
+  
+  /* Adjust top position for each bubble */
+  /*  */

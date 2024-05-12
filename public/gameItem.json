@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Gaming Chairs",
+        "img": "https://i.postimg.cc/7YHYkf8G/pexels-bertellifotografia-13871188.jpg"
+    },
+    {
+        "id": 2,
+        "name": "Computer Mice",
+        "img": "https://i.postimg.cc/XYXjrmvn/pexels-bertellifotografia-19012035.jpg"
+    },
+    {
+        "id": 3,
+        "name": "Headphone",
+        "img": "https://i.postimg.cc/zBY8PfFf/pexels-garrettmorrow-610945.jpg"
+    },
+    {
+        "id": 4,
+        "name": "Controller",
+        "img": "https://i.postimg.cc/7hxDwQc8/pexels-mahavir-shah-416970257-15822010.jpg"
+    }
+]

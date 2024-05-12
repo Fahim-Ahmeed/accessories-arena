@@ -1,0 +1,23 @@
+[
+    {
+      "id": 1,
+      "title": "Computer Accessories",
+      "image": "https://i.postimg.cc/sXZV6318/pexels-athena-2582932.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Gaming Accessories",
+      "image": "https://i.postimg.cc/2jhknjsL/pexels-designecologist-1779487.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Phone Accessories",
+      "image": "https://i.postimg.cc/02ZqCzcj/pexels-solliefoto-336948.jpg"
+    },
+    {
+      "id": 4,
+      "title": "PC Setup",
+      "image": "https://i.postimg.cc/FHB522tQ/pexels-tombrand-1637438.jpg"
+    }
+  ]
+  
