@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import troubleshootIssues from "../../../../public/troubleshoot";
 import img from"../../../assets/Stuck.jpg";
 import './Troubleshoot.css'
+import { AiFillCheckCircle,AiOutlineInfoCircle,AiFillCaretLeft } from "react-icons/ai";
+import { MdOutlineTroubleshoot } from "react-icons/md";
 const Troubleshoot = () => {
     const [issues, setIssues] = useState([]);
     const [previousIssues, setPreviousIssues] = useState([]);
@@ -52,17 +54,18 @@ const Troubleshoot = () => {
                     <img src={img} className="opacity-30 md:opacity-100" alt="" />
                 </div>
                 <div className="absolute duration-1000  space-y-4 w-1/2 md:w-3/4 top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2 text-center bg-transparent  md:bg-gradient-to-r from-gray-500 to-gray-900  p-4">
-                    <h2 className="text-4xl font-bold text-purple-950  md:text-yellow-400 ">Tech troubles ? Let us be your solution !</h2>
-                    <button className="btn md:btn-outline btn-warning" onClick={()=>{setFindIssue(!findIssue)}}>Try Troubleshoot</button>
+                    <h2 className="text-2xl md:text-4xl font-bold text-purple-950  md:text-yellow-400 ">Tech troubles ? Let us be your solution !</h2>
+                    <button className="btn md:btn-outline btn-warning" onClick={()=>{setFindIssue(!findIssue)}}><MdOutlineTroubleshoot />Try Troubleshoot</button>
                 </div>
                </div>
                 :
-                <div className=" w-full md:w-3/4 h-auto bg-gradient-to-r from-stone-500 to-stone-900 mt-8 mb-8 p-8 relative flex flex-col">
-                    <button className="join-item btn btn-outline mb-4 text-yellow-500 w-fit" onClick={()=>{handleBack()}}>Previous Option</button>  
-                         <div role="alert" className={`alert ${(Array.isArray(issues))?"alert-success":"alert-warning"} w-fit absolute right-5`}>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                        <span>{(Array.isArray(issues))?"Try these steps":"Select your Issues"}</span>
-                        </div>     
+                <div className=" w-full md:w-full lg:w-3/4 h-auto bg-gradient-to-r from-stone-500 to-stone-900 mt-8 mb-8 p-8 relative flex flex-col">
+                    <button className="join-item btn btn-outline mb-4 text-yellow-500 w-fit" onClick={()=>{handleBack()}}><AiFillCaretLeft />Previous Option</button>  
+                         <h2 className={`absolute top-10 right-10 flex items-center gap-2 text-blue-500 lg:text-xl ${Array.isArray(issues)?"text-yellow-600":"text-blue-500"} `}>
+                            {Array.isArray(issues)?<AiOutlineInfoCircle/>:<AiFillCheckCircle/>}
+                            {Array.isArray(issues)?"Try these steps carefully":"Select your issues"}
+                            </h2>  
+ 
                                         {
                          (Array.isArray(issues))?issues.map((item,key)=>(
                            
@@ -74,7 +77,6 @@ const Troubleshoot = () => {
                               animation-delay:${delay}s
                               top:${position}
                               `}>
-                                
                               {item}
                               </div>
                             </div>)
