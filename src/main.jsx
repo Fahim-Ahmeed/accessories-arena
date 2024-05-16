@@ -11,6 +11,7 @@ import Home from './assets/Components/Home/Home';
 import Contact from './assets/Components/Contact/Contact';
 import Community from './assets/Components/Community/Community';
 import Login from './assets/Components/Login/Login';
+import Products from './assets/Components/Products/Products';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -30,8 +31,15 @@ const router = createBrowserRouter([
         element:<Community></Community>,
       },
       {
-        path:"login",
+        path:"/login",
         element:<Login></Login>,
+      },
+      {
+        path:"/products",
+        loader:()=>
+          fetch(`https://openapi.programming-hero.com/api/phones?search=iphone`)
+        ,
+        element:<Products></Products>
       }
     ]
   },

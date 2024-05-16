@@ -61,7 +61,7 @@ const Troubleshoot = () => {
                 :
                 <div className=" w-full md:w-full lg:w-3/4 h-auto bg-gradient-to-r from-stone-500 to-stone-900 mt-8 mb-8 p-8 relative flex flex-col">
                     <button className="join-item btn btn-outline mb-4 text-yellow-500 w-fit" onClick={()=>{handleBack()}}><AiFillCaretLeft />Previous Option</button>  
-                         <h2 className={`absolute top-10 right-10 flex items-center gap-2 text-blue-500 lg:text-xl ${Array.isArray(issues)?"text-yellow-600":"text-blue-500"} `}>
+                         <h2 className={`absolute top-10 right-1 md:right-10 flex items-center gap-2 text-blue-500 lg:text-xl ${Array.isArray(issues)?"text-yellow-600":"text-blue-500"} `}>
                             {Array.isArray(issues)?<AiOutlineInfoCircle/>:<AiFillCheckCircle/>}
                             {Array.isArray(issues)?"Try these steps carefully":"Select your issues"}
                             </h2>  

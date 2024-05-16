@@ -7,7 +7,7 @@ const Navbar = () => {
     const[open,setOpen]=useState(false)
     const navItem=<>
     <li><NavLink to="/">Home</NavLink></li>
-    <li><NavLink to="Products">Products</NavLink></li>
+    <li><NavLink to="/products">Products</NavLink></li>
     <li><NavLink to="/community">Community</NavLink></li>
     <li><NavLink to="/contact">Contact</NavLink></li>
     </>
