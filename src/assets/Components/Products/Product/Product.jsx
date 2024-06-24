@@ -1,9 +1,13 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { FaCartArrowDown } from "react-icons/fa";
+import { TbJewishStar } from "react-icons/tb";
+import {Item} from "../../Context/ProductContext";
 
 const Product = ({ item }) => {
+  const{cart,setCart,wishlist,setWishlist}=useContext(Item)
   const { brand, phone_name, slug, image } = item;
 
-  let value = "";
+  console.log(cart,wishlist)
   // useEffect(()=>{
 
   // },showDetails)
@@ -21,7 +25,7 @@ const Product = ({ item }) => {
     console.log(showDetails);
     console.log(showDetails.slug);
     // console.log(id)
-    value = id;
+    // value = id;
     const modal = document.getElementById(`${slug}`);
     if (modal) {
       modal.showModal();
@@ -44,9 +48,14 @@ const Product = ({ item }) => {
               onClick={() => handleShowDetail(slug)}
             >
               Show Details
-            </button>
+            </button >
           </div>
+          
         </div>
+        <div className="flex justify-between m-8 ">
+            <div><FaCartArrowDown  onClick={() => {setCart(slug)}}/></div>
+          <div><TbJewishStar onClick={() => {setWishlist(slug)}} /></div>
+          </div>
       </div>
 
       {/* Open the modal using document.getElementById('ID').showModal() method */}

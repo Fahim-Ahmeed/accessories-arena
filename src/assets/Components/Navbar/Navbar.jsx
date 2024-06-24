@@ -1,16 +1,25 @@
 import { NavLink } from "react-router-dom";
 import logo from '../../../assets/accessory arena logos/logo.jpg';
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { AiOutlineMenuUnfold,AiFillCloseSquare } from "react-icons/ai";
-
+import { Auth } from "../Context/AuthenticationContext";
+import {
+  FaSignOutAlt,
+  FaSignInAlt
+} from "react-icons/fa";
 const Navbar = () => {
     const[open,setOpen]=useState(false)
+   const {user,logOut}= useContext(Auth)
     const navItem=<>
     <li><NavLink to="/">Home</NavLink></li>
     <li><NavLink to="/products">Products</NavLink></li>
     <li><NavLink to="/community">Community</NavLink></li>
+    <li><NavLink to="/dashboard">Dashboard</NavLink></li>
     <li><NavLink to="/contact">Contact</NavLink></li>
     </>
+     const handleLogOut=()=>{
+      logOut()
+     }
     return (
         <div className="relative">
             <div className="navbar  bg-gray-100 text-slate-950 font-bold">
@@ -48,7 +57,11 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <NavLink to="/login"><button className="btn btn-outline btn-secondary">Login</button></NavLink>
+    {
+      user
+      ?<NavLink to="/login"><span>{user.displayName}</span> <button className="btn btn-outline btn-secondary" onClick={handleLogOut}><FaSignOutAlt></FaSignOutAlt> Logout</button></NavLink>
+      :<NavLink to="/login"><button className="btn btn-outline btn-secondary"><FaSignInAlt></FaSignInAlt> Login</button></NavLink>
+    }
   </div>
 </div>
         </div>

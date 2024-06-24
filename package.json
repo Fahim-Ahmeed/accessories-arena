@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@egjs/react-flicking": "^4.11.2",
+    "emailjs-com": "^3.2.0",
+    "firebase": "^10.12.2",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
     "react-awesome-button": "^7.0.5",
