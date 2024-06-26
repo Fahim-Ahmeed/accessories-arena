@@ -1,29 +1,20 @@
-import { Link,useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
-import { doc, setDoc} from 'firebase/firestore';
-import { useContext, useState } from "react";
-import {
-  sendEmailVerification,
-  updateProfile,
-} from "firebase/auth";
-import { Auth } from "../Context/AuthenticationContext";
-import {  db } from "../Firebase/firebase.config";
-
-const Register = () => {
-  const navigate = useNavigate();
-  const { notify,createUser } = useContext(Auth);
+import { Auth } from "../../../Context/AuthenticationContext";
+import { sendEmailVerification, updateProfile } from "firebase/auth";
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from "../../../Firebase/firebase.config";
+import { space } from "postcss/lib/list";
+const AddAdmin = () => {
+  const { notify, createUser } = useContext(Auth);
   const [see, setSee] = useState(false);
- 
-  // const [message, setMesssage] = useState();
-  const role="user";
-  const handleRegister = async (e) => {
+  const handleAddAdmin = async(e) => {
+    let role='admin'
     e.preventDefault();
-  
-    const username = e.target.name.value;
+    const adminName = e.target.name.value;
     const email = e.target.email.value;
     const password = e.target.password.value;
-    const condition = e.target.condition.checked;
-    console.log("condition", condition);
+    const rePassword=e.target.rePassword.value;
 
     if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(email)) {
       notify("please give an valid email");
@@ -32,17 +23,32 @@ const Register = () => {
       !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/.test(
         password
       )
+      
     ) {
       notify(
         "please make a password with a combination of Uppercase,lowercase,symbol,and number more than 6 character"
       );
       return;
-    } else if (!condition) {
-      notify("accept terms and conditions");
-      return;
     }
-
-
+    else if (
+        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{7,}$/.test(
+          rePassword
+        )
+        
+      ) {
+        notify(
+            "please make a password with a combination of Uppercase,lowercase,symbol,and number more than 6 character"
+          );
+          return;
+      }
+      else if(password!==rePassword){
+        notify(
+            "Passwor does't match"
+          );
+          return;
+      }
+    
+    
 
     createUser(email, password)
     .then(async (result) => {
@@ -50,42 +56,40 @@ const Register = () => {
       notify("check your email for verification");
 
       await updateProfile(result.user, {
-        displayName: username,
+        displayName: adminName,
       });
 
       await setDoc(doc(db, 'users', result.user.uid), {
-        username: username,
+        adminName: adminName,
         email: email,
         role: role,
       });
 
-      notify("User created successfully");
+      notify("Admin Added Successfully");
       e.target.reset();
-      navigate("/login", { state: { fromRedirectPage: true } });
+      
     })
      
       .catch((error) => {
         console.error(error.message);
         notify(error.message);
       });
-
-    console.log(username, email, password);
   };
   return (
     <div className="hero min-h-screen bg-base-200">
       <div className="hero-content flex-col lg:flex-row-reverse">
         <div className="text-center lg:text-left">
-          <h1 className="text-5xl font-bold">Register now!</h1>
+          <h1 className="text-5xl font-bold">Add Admin!</h1>
         </div>
         <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-          <form className="card-body" onSubmit={handleRegister}>
+          <form className="card-body" onSubmit={handleAddAdmin}>
             <div className="form-control">
               <label className="label">
-                <span className="label-text">User Name</span>
+                <span className="label-text">Admin Name</span>
               </label>
               <input
                 type="text"
-                placeholder="user name"
+                placeholder="admin name"
                 className="input input-bordered"
                 autoComplete="name"
                 name="name"
@@ -132,42 +136,43 @@ const Register = () => {
                   }}
                 />
               )}
+            </div>
+            <div className="form-control relative">
               <label className="label">
-                <Link
-                  to="/forgetPassword"
-                  className="label-text-alt link link-hover"
-                >
-                  Forget Password
-                </Link>
+                <span className="label-text">Retype Password</span>
               </label>
-              {/* {message && <p className="text-alert">{message}</p>} */}
-              <div className="flex ">
-                <input type="checkbox" name="condition" id="" />
-                <label className="label ">
-                  <a href="">Accept Terms and conditions</a>
-                </label>
-              </div>
-
-              <p>
-                Already have accocunt?
-                <Link to="/login">
-                  <button className="btn btn-active btn-link">Login</button>
-                </Link>{" "}
-              </p>
+              <input
+                type={see ? "text" : "password"}
+                placeholder="Retyped password"
+                name="rePassword"
+                className="input input-bordered relative "
+                required
+                autoComplete="current-password"
+              />
+              {see ? (
+                <AiFillEye
+                  className="absolute top-12  right-1"
+                  onClick={() => {
+                    setSee(!see);
+                  }}
+                />
+              ) : (
+                <AiFillEyeInvisible
+                  className="absolute top-12 right-1"
+                  onClick={() => {
+                    setSee(!see);
+                  }}
+                />
+              )}
             </div>
             <div className="form-control mt-6">
-              <input
-                type="submit"
-                className="btn btn-primary"
-                value="Register"
-              />
+              <input type="submit" className="btn btn-primary" value="Submit" />
             </div>
           </form>
-          
         </div>
       </div>
     </div>
   );
 };
 
-export default Register;
+export default AddAdmin;

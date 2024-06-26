@@ -15,10 +15,10 @@ const PrivateRoute = ({ children }) => {
   if (user) {
     return children;
   }
-  if(location.pathname!="/dashboard" && location.pathname!="/contact"){
+  if(location.pathname!="/dashboard" && location.pathname!="/contact"  && location.pathname!="/cart"){
     return <Navigate to="/" state={{from:location}}replace/>
   }
-console.log(location)
+
 
   //   if (!user) {
   //     <Navigate to="/login" state={{ from: location }} replace />;

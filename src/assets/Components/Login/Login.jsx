@@ -3,6 +3,7 @@ import { Link,useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { IoLogoFacebook } from "react-icons/io";
 import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { doc, setDoc,getDoc } from 'firebase/firestore';
 import { useContext, useState } from "react";
 import {
   signInWithPopup,
@@ -13,12 +14,12 @@ import {
 // import { auth } from "../../Firebase/firebase.config";
 import { useLocation } from "react-router-dom";
 // import { Auth } from "../../Context/AuthenticationContext";
-import { auth } from "../Firebase/firebase.config";
+import { auth, db } from "../Firebase/firebase.config";
 import { Auth } from "../Context/AuthenticationContext";
 
 const Login = () => {
   const {notify,loginUser}=useContext(Auth)
-
+  const role='user';
   
   const [see, setSee] = useState(false);
   const googleProvider = new GoogleAuthProvider();
@@ -29,9 +30,19 @@ const Login = () => {
   const from = location.state?.from?.pathname || '/';
   console.log(isRedirected);
 
-  const handleGoogle = () => {
+  const handleGoogle = async() => {
     signInWithPopup(auth, googleProvider)
-      .then((result) => {
+      .then(async(result) => {
+        const userDocRef = doc(db, 'users', result.user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (!userDoc.exists()) {
+          await setDoc(userDocRef, {
+            username: result.user.displayName,
+            email: result.user.email,
+            role: 'user',
+          });
+        }
         notify(`welcome ${result.user.displayName}`)
         console.log(result.user.displayName);
         navigate(from, { replace: true });
@@ -39,15 +50,28 @@ const Login = () => {
       .catch((error) => {
         console.error(error);
         notify(error.message)
-       
       });
   };
 
-  const handleFacebook = () => {
+  const handleFacebook = async() => {
     signInWithPopup(auth, facebookProvider)
-      .then((result) => {
+      .then(async(result) => {
+        const userDocRef = doc(db, 'users', result.user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (!userDoc.exists()) {
+          await setDoc(userDocRef, {
+            username: result.user.displayName,
+            email: result.user.email,
+            role: 'user',
+          });
+        }
         notify(`welcome ${result.user.displayName}`)
+        navigate(from, { replace: true });
         console.log(result.user.displayName);
+      })
+      await setDoc(doc(db, 'users'), {
+        role: role,
       })
       .catch((error) => {
         notify(error.message)
@@ -60,9 +84,22 @@ const Login = () => {
     const email = e.target.email.value;
     const password = e.target.password.value;
     loginUser(email, password)
-      .then((result) => {
+      .then(async(result) => {
+        const userDocRef = doc(db, 'users', result.user.uid);
+        const userDoc = await getDoc(userDocRef);
+
+        if (!userDoc.exists()) {
+          await setDoc(userDocRef, {
+            username: result.user.displayName,
+            email: result.user.email,
+            role: 'user',
+          });
+        }
+
+
         if(result.user.emailVerified){
           notify(`welcome ${result.user.displayName}`);
+          navigate(from, { replace: true });
           e.target.reset()
         }
         else{

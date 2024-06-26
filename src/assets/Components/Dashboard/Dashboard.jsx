@@ -1,27 +1,44 @@
-import Profile from "./CustomerDashboard/Profile/Profile";
-import { useState } from "react";
-import CustomerDashboard from "./CustomerDashboard/CustomerDashboard";
+import { useEffect, useState } from "react";
+import { doc, getDoc } from 'firebase/firestore';
+import { useContext } from "react";
+import { Auth } from "../Context/AuthenticationContext";
+import { db } from "../Firebase/firebase.config";
+import AdminDashboard from "./AdminDashboard/AdminDashboard";
+import CustomerDashboard from"./CustomerDashboard/CustomerDashboard"
 const Dashboard = () => {
-  const [selectedOption, setSelectedOption] = useState("Profile");
+  const { user } = useContext(Auth);
+  const [role, setRole] = useState(null);
 
-  const renderContent = () => {
-    switch (selectedOption) {
-      case "Profile":
-        return <Profile />;
-      //   case 'Orders':
-      //     return <Orders />;
-      //   case 'Wishlist':
-      //     return <Wishlist />;
-      // Add other cases for other components
-      default:
-        return <Profile />;
-    }
-  };
-  return (
-    <div className="flex">
-        <CustomerDashboard ></CustomerDashboard>
-    </div>
-  );
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      if (user) {
+        const userDocRef = doc(db, 'users', user.uid);
+        const userDoc = await getDoc(userDocRef);
+        
+        if (userDoc.exists()) {
+          setRole(userDoc.data().role);
+        } else {
+          console.error("User document not found");
+        }
+      }
+    };
+
+    fetchUserRole();
+  }, [user]);
+
+  if (role === 'admin') {
+    return <AdminDashboard />;
+
+  } else if (role === 'user') {
+    return <CustomerDashboard/>;
+  } else {
+    return <div>Loading...</div>;
+  }
 };
+
+// return(
+//     <AdminDashboard/>
+// )
+// }
 
 export default Dashboard;

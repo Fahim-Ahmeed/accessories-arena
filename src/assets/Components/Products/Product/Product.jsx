@@ -1,21 +1,41 @@
 import { useContext, useEffect, useState } from "react";
-import { FaCartArrowDown } from "react-icons/fa";
-import { TbJewishStar } from "react-icons/tb";
-import {Item} from "../../Context/ProductContext";
+import { BsCartXFill,BsFillCartCheckFill  } from "react-icons/bs";
+import { TbJewishStar, TbJewishStarFilled } from "react-icons/tb";
+import { Item } from "../../Context/ProductContext";
+import { set } from "firebase/database";
+import { Auth } from "../../Context/AuthenticationContext";
 
 const Product = ({ item }) => {
-  const{cart,setCart,wishlist,setWishlist}=useContext(Item)
+  const { cart, setCart, wishlist, setWishlist } = useContext(Item);
+  const {notify}=useContext(Auth)
   const { brand, phone_name, slug, image } = item;
 
-  console.log(cart,wishlist)
-  // useEffect(()=>{
+  const handleCart = async (id) => {
+   
+    if (cart.includes(id)) {
+      setCart(cart.filter((item) => item !== id));
+      notify(`${phone_name} remove from the cart`)
+    } else {
+      setCart([...cart, id]);
+      notify(`${phone_name} added to the cart`)
+    }
+  };
+  const handleWishlist = (id) => {
+    if (wishlist.includes(id)) {
+      setWishlist(wishlist.filter((item) => item !== id));
+    } else {
+      setWishlist([...wishlist, id]);
+    }
+  };
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
 
-  // },showDetails)
-
+  useEffect(() => {
+    localStorage.setItem("wishlist", JSON.stringify(wishlist));
+  }, [wishlist]);
   const [showDetails, setShowDetails] = useState({});
   const handleShowDetail = async (id) => {
-    // console.log('clicked show details', id)
-    // load single phone data
     const res = await fetch(
       `https://openapi.programming-hero.com/api/phone/${id}`
     );
@@ -24,13 +44,10 @@ const Product = ({ item }) => {
     setShowDetails(phone);
     console.log(showDetails);
     console.log(showDetails.slug);
-    // console.log(id)
-    // value = id;
     const modal = document.getElementById(`${slug}`);
     if (modal) {
       modal.showModal();
     }
-    // showPhoneDetails(phone)
   };
   return (
     <>
@@ -48,18 +65,49 @@ const Product = ({ item }) => {
               onClick={() => handleShowDetail(slug)}
             >
               Show Details
-            </button >
+            </button>
           </div>
-          
         </div>
-        <div className="flex justify-between m-8 ">
-            <div><FaCartArrowDown  onClick={() => {setCart(slug)}}/></div>
-          <div><TbJewishStar onClick={() => {setWishlist(slug)}} /></div>
+        <div className="flex justify-between m-8">
+          <div className="h-full">
+           {
+            cart.includes(slug)?(
+              <BsCartXFill 
+              className="h-8 w-8 text-rose-500" 
+              onClick={()=>{handleCart(slug)}}
+              />
+
+            ):(
+              <BsFillCartCheckFill 
+               className="h-8 w-8 text-rose-700"
+              onClick={()=>{handleCart(slug)}}
+              />
+
+            )
+           }
           </div>
+          <div>
+            {wishlist.includes(slug) ? (
+              <TbJewishStarFilled
+              className="h-8 w-8 text-rose-500"
+                onClick={() => {
+                  handleWishlist(slug);
+                }}
+              />
+            ) : (
+              <TbJewishStar
+              className="h-8 w-8 text-rose-700"
+                onClick={() => {
+                  handleWishlist(slug);
+                }}
+              />
+            )}
+          </div>
+        </div>
       </div>
 
-      {/* Open the modal using document.getElementById('ID').showModal() method */}
-      {/* <button className="btn" onClick={()=>document.getElementById('my_modal_1').showModal()}>open modal</button> */}
+
+
       <dialog id={slug} className="modal">
         <div className="card w-fit bg-gray-900 shadow-xl p-4">
           <figure>
@@ -70,29 +118,45 @@ const Product = ({ item }) => {
             {showDetails.mainFeatures && (
               <>
                 <p className="font-bold">
-                  Storage: <span className="font-normal text-sm">{showDetails.mainFeatures.storage}</span>
+                  Storage:{" "}
+                  <span className="font-normal text-sm">
+                    {showDetails.mainFeatures.storage}
+                  </span>
                 </p>{" "}
                 <p className="font-bold">
                   Display Size:{" "}
-                  <span className="font-normal text-sm">{showDetails.mainFeatures.displaySize}</span>
+                  <span className="font-normal text-sm">
+                    {showDetails.mainFeatures.displaySize}
+                  </span>
                 </p>
                 <p className="font-bold">
-                  Chipset : <span className="font-normal text-sm">{showDetails.mainFeatures.chipSet}</span>
+                  Chipset :{" "}
+                  <span className="font-normal text-sm">
+                    {showDetails.mainFeatures.chipSet}
+                  </span>
                 </p>
                 <p className="font-bold">
-                  Memory: <span className="font-normal text-sm">{showDetails.mainFeatures.memory}</span>
+                  Memory:{" "}
+                  <span className="font-normal text-sm">
+                    {showDetails.mainFeatures.memory}
+                  </span>
                 </p>
               </>
             )}
 
             <p className="font-bold">
-              Slug: <span className="font-normal text-sm">{showDetails.slug}</span>
+              Slug:{" "}
+              <span className="font-normal text-sm">{showDetails.slug}</span>
             </p>
             <p className="font-bold">
-              Release Date: <span className="font-normal text-sm">{showDetails.releaseDate}</span>
+              Release Date:{" "}
+              <span className="font-normal text-sm">
+                {showDetails.releaseDate}
+              </span>
             </p>
             <p className="font-bold">
-              Brand:<span className="font-normal text-sm">{showDetails.brand}</span>
+              Brand:
+              <span className="font-normal text-sm">{showDetails.brand}</span>
             </p>
             <form method="dialog">
               {/* if there is a button in form, it will close the modal */}
