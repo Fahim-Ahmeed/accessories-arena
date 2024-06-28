@@ -16,6 +16,7 @@ import PrivateRoute from "./assets/Components/PrivateRoute/PrivateRoute";
 import Dashboard from "./assets/Components/Dashboard/Dashboard";
 import ProductContext from "./assets/Components/Context/ProductContext";
 import Cart from "./assets/Components/Cart/Cart";
+import UpdateProduct from "./assets/Components/Dashboard/AdminDashboard/UpdateProduct/UpdateProduct";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,10 +65,19 @@ const router = createBrowserRouter([
         ),
       },
       {
+        path:`/updateProduct/:id`,
+        element:(
+          <PrivateRoute>
+            <UpdateProduct/>
+          </PrivateRoute>
+        ),
+        loader:({params})=>fetch(`http://localhost:5000/api/products/${params.id}`)
+      },
+      {
         path: "/products",
         loader: () =>
           fetch(
-            `https://openapi.programming-hero.com/api/phones?search=iphone`
+            `http://localhost:5000/api/products`
           ),
         element: <Products></Products>,
       },

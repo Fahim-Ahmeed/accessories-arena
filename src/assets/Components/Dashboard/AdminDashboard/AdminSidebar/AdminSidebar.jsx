@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import {
   FaUser,
   FaHistory,
@@ -14,21 +14,47 @@ import {
   FaQuestionCircle,
   FaSignOutAlt,
 } from "react-icons/fa";
-const AdminSidebar = ({onSelect}) => {
+import { AiOutlineProduct } from "react-icons/ai";
+import { IoIosPersonAdd,IoLogoGameControllerB } from "react-icons/io";
+import { FaSitemap } from "react-icons/fa6";
+import { FaComputer } from "react-icons/fa6";
+import { IoPhonePortraitSharp } from "react-icons/io5";
+
+
+const AdminSidebar = ({ onSelect }) => {
+  const [selectedItem, setSelectedItem] = useState(null);
+
   const menuItems = [
-    { name: "Profile", icon: <FaUser /> },
-    { name: "Orders", icon: <FaHistory /> },
-    { name: "Wishlist", icon: <FaHeart /> },
-    { name: "Shopping Cart", icon: <FaShoppingCart /> },
-    { name: "Address Book", icon: <FaAddressBook /> },
-    { name: "Payment Methods", icon: <FaCreditCard /> },
+    { name: "Product Management", icon: <AiOutlineProduct />},
+    { name: "Order Management", icon: <FaHistory /> },
+    { name: "Report & analytics", icon: <FaHeart /> },
+    { name: "Add Admin", icon: <IoIosPersonAdd />},
+    {
+      name: "Add Product",
+      productType: [
+        { name: "Computer Accessories", icon: <FaComputer /> },
+        { name: "Phone Accessories", icon: <IoPhonePortraitSharp />},
+        { name: "Gaming Accessories", icon: <IoLogoGameControllerB /> },
+        { name: "Phone", icon:<IoPhonePortraitSharp/> },
+      ],
+      icon: <FaSitemap />,
+    },
+    { name: "Setting", icon: <FaShoppingCart /> },
+    { name: "Profile", icon: <FaAddressBook /> },
     { name: "Notifications", icon: <FaBell /> },
-    { name: "Add Admin", icon: <FaStar /> },
     { name: "Loyalty Program", icon: <FaGift /> },
     { name: "Returns", icon: <FaUndo /> },
     { name: "Account Settings", icon: <FaCog /> },
     { name: "Help and Support", icon: <FaQuestionCircle /> },
+    { name: "Logout", icon: <FaSignOutAlt/>},
   ];
+
+  const handleSelect = (item) => {
+    setSelectedItem(selectedItem === item.name ? null : item.name);
+    onSelect(item.name);
+    console.log("Selected item:", item);
+  };
+
   return (
     <div>
       <div className="drawer lg:drawer-open">
@@ -48,16 +74,38 @@ const AdminSidebar = ({onSelect}) => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
-          <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            {menuItems.map((item, index) => (
-              <li
-                key={index}
-                className="sidebar-item"
-                onClick={() => onSelect(item.name)}
-              >
-                {item.icon} <span>{item.name}</span>
-              </li>
-            ))}
+
+          <ul className="menu bg-base-200 rounded-box w-56">
+            {menuItems.map((item, index) =>
+              item.productType ? (
+                <li key={index}>
+                  <details open>
+                    <summary>
+                      {item.icon} <span>{item.name}</span>
+                    </summary>
+                    <ul className="menu">
+                      {item.productType.map((type, i) => (
+                        <li
+                          key={`${index}-${i}`}
+                          className="sidebar-item cursor-pointer "
+                          onClick={() => handleSelect(type)}
+                        >
+                         <span className="flex"> <span>{type.icon} </span> <span>{type.name}</span></span>
+                        </li>
+                      ))}
+                    </ul>
+                  </details>
+                </li>
+              ) : (
+                <li
+                  key={index}
+                  className="sidebar-item cursor-pointer"
+                  onClick={() => handleSelect(item)} 
+                >
+                 <span className="flex"> <span>{item.icon} </span><span>{item.name}</span></span>
+                </li>
+              )
+            )}
           </ul>
         </div>
       </div>

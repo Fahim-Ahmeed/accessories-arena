@@ -9,12 +9,14 @@ import {
   signOut,
 } from "firebase/auth";
 import { auth, db } from "../Firebase/firebase.config";
-import { doc, getDoc } from "firebase/firestore";
+import { doc, getDoc } from 'firebase/firestore';
 
 export const Auth = createContext(null);
 const AuthenticationContext = ({ children }) => {
   const [user, setUser] = useState(null);
+  const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const notify = (message) => {
     toast(message);
   };
@@ -43,6 +45,26 @@ const AuthenticationContext = ({ children }) => {
     }
 
 },[])
+
+
+useEffect(() => {
+  const fetchUserRole = async () => {
+    if (user) {
+      const userDocRef = doc(db, 'users', user.uid);
+      const userDoc = await getDoc(userDocRef);
+      
+      if (userDoc.exists()) {
+        setRole(userDoc.data().role);
+      } else {
+        console.error("User document not found");
+      }
+    }
+  };
+
+  fetchUserRole();
+}, [user]);
+
+
   const authInfo = {
     user,
     createUser,
@@ -50,6 +72,10 @@ const AuthenticationContext = ({ children }) => {
     loginUser,
     logOut,
     loading,
+    sidebarOpen, 
+    setSidebarOpen,
+    role,
+    setRole
   };
   return (
     <Auth.Provider value={authInfo}>

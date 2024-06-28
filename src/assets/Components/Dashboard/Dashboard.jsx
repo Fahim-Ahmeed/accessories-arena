@@ -6,25 +6,7 @@ import { db } from "../Firebase/firebase.config";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import CustomerDashboard from"./CustomerDashboard/CustomerDashboard"
 const Dashboard = () => {
-  const { user } = useContext(Auth);
-  const [role, setRole] = useState(null);
-
-  useEffect(() => {
-    const fetchUserRole = async () => {
-      if (user) {
-        const userDocRef = doc(db, 'users', user.uid);
-        const userDoc = await getDoc(userDocRef);
-        
-        if (userDoc.exists()) {
-          setRole(userDoc.data().role);
-        } else {
-          console.error("User document not found");
-        }
-      }
-    };
-
-    fetchUserRole();
-  }, [user]);
+  const { user,role} = useContext(Auth);
 
   if (role === 'admin') {
     return <AdminDashboard />;
