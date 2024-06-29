@@ -30,9 +30,7 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: (
-          <PrivateRoute>
             <Contact></Contact>
-          </PrivateRoute>
         ),
       },
       {
@@ -71,13 +69,13 @@ const router = createBrowserRouter([
             <UpdateProduct/>
           </PrivateRoute>
         ),
-        loader:({params})=>fetch(`http://localhost:5000/api/products/${params.id}`)
+        loader:({params})=>fetch(`https://accessories-arena-server.onrender.com/api/products/${params.id}`)
       },
-      {
+      { 
         path: "/products",
-        loader: () =>
+        loader: () => 
           fetch(
-            `http://localhost:5000/api/products`
+            `https://accessories-arena-server.onrender.com/api/products`
           ),
         element: <Products></Products>,
       },

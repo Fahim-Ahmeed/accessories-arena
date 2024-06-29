@@ -11,6 +11,8 @@ import GamingAccessories from "./AdminSidebar/AddProduct/GamingAccessories/Gamin
 import PhoneAccessories from "./AdminSidebar/AddProduct/PhoneAccessories/PhoneAccessories";
 import ProductList from "../CustomerDashboard/Profile/Profile";
 import AddPhone from "./AdminSidebar/AddProduct/AddPhone/AddPhone";
+import DynamicForm from "./AdminSidebar/AddProduct/DynamicForm";
+import { productConfigurations } from "./AdminSidebar/AddProduct/productConfigurations";
 // import AddAdmin from "./AdminSidebar/AddAdmin/AddAdmin";
 
 const AdminDashboard = ({onSelect}) => {
@@ -24,15 +26,16 @@ const AdminDashboard = ({onSelect}) => {
           case "Shopping Cart":
             return <Cart/>;
             case "Computer Accessories":
-            return<ComputerAccessories/>;
+            return <DynamicForm config={productConfigurations['computerAccessory']} productType={'computer-accessories'} />;
             case"Phone Accessories":
-            return<PhoneAccessories/>
+            return<DynamicForm config={productConfigurations['phoneAccessory']} productType={'phone-accessories'}/>;
             case "Gaming Accessories":
-            return<GamingAccessories/>;
+            return<DynamicForm config={productConfigurations['gamingAccessory']} productType={'gaming-accessories'}/>;
             case "Add Admin":
-                return <AddAdmin/>;
+                return <AddAdmin/>
                 case"Phone":
-                return<AddPhone/>
+
+                return<DynamicForm config={productConfigurations['phones']} productType={'phones'}/>;
           // Add other cases for other components
           default:
             return <Profile />;

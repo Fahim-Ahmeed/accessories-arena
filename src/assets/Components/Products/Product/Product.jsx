@@ -5,10 +5,12 @@ import { Item } from "../../Context/ProductContext";
 import { Auth } from "../../Context/AuthenticationContext";
 import { RxUpdate } from "react-icons/rx";
 import { RiDeleteBin6Fill } from "react-icons/ri";
+import axios from 'axios';
 import UpdateProduct from "../../Dashboard/AdminDashboard/UpdateProduct/UpdateProduct";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Product = ({ item }) => {
+ const navigate=useNavigate()
   const { cart, setCart, wishlist, setWishlist } = useContext(Item);
   const { notify, role } = useContext(Auth);
   const {
@@ -45,19 +47,24 @@ console.log(role)
   const handleDetails = (product) => {
     setSelectedProduct(product);
   };
-// const handleUpdate=(item)=>{
-//   <UpdateProduct item={item}/>
-// console.log(item)
-// }
-const handleDelete=(item)=>{
-console.log(item)
-}
+
+const handleDelete = async (productId) => {
+  console.log(productId)
+  try {
+    const response = await axios.delete(`https://accessories-arena-server.onrender.com/api/products/${productId}`);
+    navigate("/products")
+    console.log(response.data);
+  } catch (error) {
+    console.error('Error deleting product:', error);
+  }
+};
+
   return (
     <>
       <div className="card w-full bg-gray-200 text-black shadow-xl">
         <figure className="px-10 pt-10">
           <img
-            src={`http://localhost:5000/${images}`}
+            src={`https://accessories-arena-server.onrender.com/${images}`}
             alt="Accessory"
             className="rounded-xl"
           />
@@ -80,7 +87,7 @@ console.log(item)
           {role === "admin" ? (
             <div className="h-full">
               <RiDeleteBin6Fill 
-              // onClick={()=>{handleUpdate(item)}}
+             onClick={()=>{handleDelete(_id)}}
               className="h-8 w-8 text-rose-900" />
             </div>
           ) : (
@@ -133,7 +140,7 @@ console.log(item)
             <div className="card lg:card-side bg-base-100 shadow-xl">
               <figure>
                 <img
-                  src={`http://localhost:5000/${selectedProduct.images}`}
+                  src={`https://accessories-arena-server.onrender.com/${selectedProduct.images}`}
                   alt={selectedProduct.name}
                 />
               </figure>

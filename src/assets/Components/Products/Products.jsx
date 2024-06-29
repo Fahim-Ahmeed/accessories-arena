@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 
 const Products = () => {
   const product = useLoaderData();
+  console.log(product)
   // const [inputValue, setInputValue] = useState("");
   // const [searchResult, setSearchResult] = useState([]);
 console.log(product)

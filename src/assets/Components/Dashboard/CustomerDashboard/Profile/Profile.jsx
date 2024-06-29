@@ -7,7 +7,7 @@ const ProductList = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/products');
+        const response = await axios.get('https://accessories-arena-server.onrender.com/api/products');
         setProducts(response.data);
       } catch (error) {
         console.error('Error fetching products:', error);
@@ -36,7 +36,7 @@ const ProductList = () => {
                 {product.images.map((image, index) => (
                   <img
                     key={index}
-                    src={`http://localhost:5000/${image}`}
+                    src={`https://accessories-arena-server.onrender.com/${image}`}
                     alt={product.name}
                     className="w-full h-auto border border-gray-300 rounded-md"
                   />

@@ -12,10 +12,10 @@ const Contact = () => {
       message : e.target.message.value
     }
     emailjs.send(
-      'service_lyb6m2i', // Replace with your EmailJS service ID
-      'template_ezst4ep', // Replace with your EmailJS template ID
+      'service_s5tk88b', // Replace with your EmailJS service ID
+      'template_3wq6bba', // Replace with your EmailJS template ID
     formData,
-      '0BYUHsyAxt4ka-fjC' // Replace with your EmailJS user ID
+      '6t51js_IQFZuGoTa0' // Replace with your EmailJS user ID
     ).then((response) => {
       notify('Message sent successfully!');
       e.target.reset()
