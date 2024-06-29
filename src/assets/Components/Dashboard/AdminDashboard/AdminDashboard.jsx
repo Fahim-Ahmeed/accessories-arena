@@ -13,6 +13,7 @@ import ProductList from "../CustomerDashboard/Profile/Profile";
 import AddPhone from "./AdminSidebar/AddProduct/AddPhone/AddPhone";
 import DynamicForm from "./AdminSidebar/AddProduct/DynamicForm";
 import { productConfigurations } from "./AdminSidebar/AddProduct/productConfigurations";
+import Products from "../../Products/Products";
 // import AddAdmin from "./AdminSidebar/AddAdmin/AddAdmin";
 
 const AdminDashboard = ({onSelect}) => {
@@ -38,7 +39,7 @@ const AdminDashboard = ({onSelect}) => {
                 return<DynamicForm config={productConfigurations['phones']} productType={'phones'}/>;
           // Add other cases for other components
           default:
-            return <Profile />;
+            return <Products/>;
         }
       };
   return (
