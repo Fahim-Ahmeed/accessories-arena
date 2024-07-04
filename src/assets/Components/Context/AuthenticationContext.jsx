@@ -13,6 +13,7 @@ import { doc, getDoc } from 'firebase/firestore';
 
 export const Auth = createContext(null);
 const AuthenticationContext = ({ children }) => {
+  const [userData,setUserData]=useState([])
   const [user, setUser] = useState(null);
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -76,6 +77,8 @@ useEffect(() => {
     setSidebarOpen,
     role,
     setRole
+    ,userData,
+    setUserData
   };
   return (
     <Auth.Provider value={authInfo}>

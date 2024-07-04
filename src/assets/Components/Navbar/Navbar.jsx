@@ -23,6 +23,9 @@ const Navbar = () => {
         <NavLink to="/products">Products</NavLink>
       </li>
       <li>
+        <NavLink to="/repairService">Repair Service</NavLink>
+      </li>
+      <li>
         <NavLink to="/community">Community</NavLink>
       </li>
       <li>
@@ -35,6 +38,7 @@ const Navbar = () => {
   );
 
   const handleLogOut = () => {
+    localStorage.clear();
     logOut();
   };
 

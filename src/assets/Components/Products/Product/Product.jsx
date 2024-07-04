@@ -24,9 +24,11 @@ const Product = ({ item }) => {
     images,
   } = item;
 console.log(role)
+console.log(item)
   const [selectedProduct, setSelectedProduct] = useState(null);
 
   const handleCart = async (id) => {
+    console.log(id)
     if (cart.includes(id)) {
       setCart(cart.filter((item) => item !== id));
       notify(`${name} removed from the cart`);
@@ -37,6 +39,7 @@ console.log(role)
   };
 
   const handleWishlist = (id) => {
+   
     if (wishlist.includes(id)) {
       setWishlist(wishlist.filter((item) => item !== id));
     } else {

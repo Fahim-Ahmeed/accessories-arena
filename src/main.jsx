@@ -17,6 +17,7 @@ import Dashboard from "./assets/Components/Dashboard/Dashboard";
 import ProductContext from "./assets/Components/Context/ProductContext";
 import Cart from "./assets/Components/Cart/Cart";
 import UpdateProduct from "./assets/Components/Dashboard/AdminDashboard/UpdateProduct/UpdateProduct";
+import RepairService from "./assets/Components/RepairService/RepairService";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -63,6 +64,10 @@ const router = createBrowserRouter([
             <Cart></Cart>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/repairService",
+        element :<RepairService></RepairService>
       },
       {
         path:`/updateProduct/:id`,

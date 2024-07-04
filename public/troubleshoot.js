@@ -491,6 +491,12 @@
                 "Backup your important files before proceeding, as a clean installation will erase all data on your system drive"
             ]
         }
+    },
+    "UPS Issues":{
+        "Power Failure":["Check the power cord connection, ensure the UPS is plugged into a working outlet, and test the outlet with another device. Verify that the UPS battery is properly connected and not depleted."],
+        "Battery Not Charging":["Inspect the battery connections and ensure they are secure. Check for any visible damage to the battery. Test the UPS with a known good battery if available."],
+        "Alarm Sounds":["Refer to the user manual for alarm codes. Common causes include overload, low battery, or a faulty battery. Reduce the connected load to within the UPS’s capacity and test again."],
+        "Frequent Switching to Battery":[" Check for power quality issues such as voltage fluctuations or frequent brownouts. Use a surge protector or line conditioner to stabilize the power supply."]
     }
 }
 export default troubleshootIssues;

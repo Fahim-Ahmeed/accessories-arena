@@ -3,6 +3,7 @@ import Profile from "./Profile/Profile";
 import CustomerSidebar from "./CustomerSidebar/CustomerSidebar";
 import Orders from "./Orders/Orders";
 import Cart from "../../Cart/Cart";
+import ReviewForm from "../../Reviews/Reviews";
 const CustomerDashboard = ({ onSelect }) => {
   const [selectedOption, setSelectedOption] = useState("Profile");
   const renderContent = () => {
@@ -13,6 +14,8 @@ const CustomerDashboard = ({ onSelect }) => {
         return <Orders />;
       case "Shopping Cart":
         return <Cart />;
+        case "Reviews":
+        return <ReviewForm/>
       // Add other cases for other components
       default:
         return <Profile />;

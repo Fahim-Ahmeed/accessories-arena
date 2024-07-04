@@ -165,6 +165,17 @@ const AddAdmin = () => {
                 />
               )}
             </div>
+            <label className="label">
+                <span className="label-text">Number</span>
+              </label>
+              <input
+                type="number"
+                placeholder="Number "
+                name="number"
+                className="input input-bordered relative "
+                required
+                autoComplete="current-password"
+              />
             <div className="form-control mt-6">
               <input type="submit" className="btn btn-primary" value="Submit" />
             </div>
