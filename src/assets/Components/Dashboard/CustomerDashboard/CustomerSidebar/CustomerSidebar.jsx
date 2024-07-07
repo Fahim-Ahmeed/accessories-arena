@@ -14,10 +14,11 @@ import {
   FaQuestionCircle,
   FaSignOutAlt,
 } from "react-icons/fa";
+import { NavLink } from "react-router-dom";
 const CustomerSidebar = ({onSelect}) => {
   const menuItems = [
     { name: "Profile", icon: <FaUser /> },
-    { name: "Orders", icon: <FaHistory /> },
+    { name: "Order Track", icon: <FaHistory /> },
     { name: "Wishlist", icon: <FaHeart /> },
     { name: "Shopping Cart", icon: <FaShoppingCart /> },
     { name: "Address Book", icon: <FaAddressBook /> },
@@ -48,9 +49,10 @@ const CustomerSidebar = ({onSelect}) => {
             aria-label="close sidebar"
             className="drawer-overlay"
           ></label>
+        
           <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             {menuItems.map((item, index) => (
-              <li
+             <li
                 key={index}
                 className="sidebar-item"
                 onClick={() => onSelect(item.name)}

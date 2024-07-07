@@ -28,7 +28,7 @@ const ComputerAccessories = () => {
       }
     }
     try {
-      const response = await axios.post('https://accessories-arena-server.onrender.com/api/computer-accessories', formData, {
+      const response = await axios.post('http://localhost:5000/api/computer-accessories', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

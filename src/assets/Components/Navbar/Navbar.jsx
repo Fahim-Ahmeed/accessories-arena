@@ -43,8 +43,8 @@ const Navbar = () => {
   };
 
   return (
-    <div className="relative">
-      <div className="navbar bg-gray-100 text-slate-950 font-bold">
+    <div className="relative mb-4">
+      <div className="navbar fixed  top-0 -left-0.5 bg-gray-100 z-50 text-slate-950 font-bold">
         <div className="navbar-start">
           <div className="dropdown">
             <div
@@ -104,6 +104,7 @@ const Navbar = () => {
           )}
         </div>
       </div>
+      <div className="mt-16"></div>
     </div>
   );
 };

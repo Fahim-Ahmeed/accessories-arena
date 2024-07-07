@@ -22,7 +22,7 @@ const RepairServices = () => {
     // Fetch available repair services
     const fetchServices = async () => {
       try {
-        let res = await fetch("http://localhost:5000/api/repair-services");
+        let res = await fetch("http://localhost:5000 /api/repair-services");
         let data = await res.json();
         setServices(data);
       } catch (error) {
@@ -57,7 +57,7 @@ const RepairServices = () => {
     // }
 
     // try {
-    //   const response = await fetch('http://localhost:5000/api/repair-services', {
+    //   const response = await fetch('http://localhost:5000 /api/repair-services', {
     //     method: 'POST',
     //     body: formDataToSend,
     //   });

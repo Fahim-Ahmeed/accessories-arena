@@ -24,7 +24,7 @@ const UpdateProduct = () => {
     const fetchProduct = async () => {
       try {
         const response = await axios.get(
-          `https://accessories-arena-server.onrender.com/api/products/${id}`
+          `http://localhost:5000/api/products/${id}`
         );
         const productData = response.data;
         setInitialFormState(productData);

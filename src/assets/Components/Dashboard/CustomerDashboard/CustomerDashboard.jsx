@@ -1,19 +1,25 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Profile from "./Profile/Profile";
 import CustomerSidebar from "./CustomerSidebar/CustomerSidebar";
 import Orders from "./Orders/Orders";
 import Cart from "../../Cart/Cart";
 import ReviewForm from "../../Reviews/Reviews";
+import AddressForm from "../../AddressForm/AddressForm";
+import { Auth } from "../../Context/AuthenticationContext";
+import OrderTrack from "../../Order/OrderTrack/OrderTrack";
 const CustomerDashboard = ({ onSelect }) => {
+  const{user}=useContext(Auth)
   const [selectedOption, setSelectedOption] = useState("Profile");
   const renderContent = () => {
     switch (selectedOption) {
       case "Profile":
         return <Profile />;
-      case "Orders":
-        return <Orders />;
+      case "Order Track":
+        return <OrderTrack/>;
       case "Shopping Cart":
         return <Cart />;
+        case "Address Book":
+        return <AddressForm email={user.email}></AddressForm>;
         case "Reviews":
         return <ReviewForm/>
       // Add other cases for other components

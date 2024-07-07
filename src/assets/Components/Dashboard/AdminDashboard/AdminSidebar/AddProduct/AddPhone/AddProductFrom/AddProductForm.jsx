@@ -39,7 +39,7 @@ const AddProductForm = ({ productType, formFields }) => {
     }
 
     try {
-      const response = await axios.post(`https://accessories-arena-server.onrender.com/api/${productType}`, formData, {
+      const response = await axios.post(`http://localhost:5000/api/${productType}`, formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
         }

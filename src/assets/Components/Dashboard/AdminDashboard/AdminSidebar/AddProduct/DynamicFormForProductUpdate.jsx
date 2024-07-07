@@ -45,7 +45,7 @@ const DynamicFormForProductUpdate = ({
     }
 
     try {
-        const response = await axios.put(`https://accessories-arena-server.onrender.com/api/products/${productId}`, formData, {
+        const response = await axios.put(`http://localhost:5000/api/products/${productId}`, formData, {
           headers: {
             'Content-Type': 'multipart/form-data',
           },

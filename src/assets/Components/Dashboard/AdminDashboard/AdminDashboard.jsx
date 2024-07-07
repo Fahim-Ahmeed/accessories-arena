@@ -14,6 +14,7 @@ import AddPhone from "./AdminSidebar/AddProduct/AddPhone/AddPhone";
 import DynamicForm from "./AdminSidebar/AddProduct/DynamicForm";
 import { productConfigurations } from "./AdminSidebar/AddProduct/productConfigurations";
 import Products from "../../Products/Products";
+import AllOrderForAdmin from "../../Order/AllOrder/AllOrderForAdmin/AllOrderForAdmin";
 // import AddAdmin from "./AdminSidebar/AddAdmin/AddAdmin";
 
 const AdminDashboard = ({onSelect}) => {
@@ -22,8 +23,8 @@ const AdminDashboard = ({onSelect}) => {
         switch (selectedOption) {
           case "Profile":
             return <ProductList />;
-          case "Orders":
-            return <Orders/>;
+          case "Order Management":
+            return <AllOrderForAdmin/>;
           case "Shopping Cart":
             return <Cart/>;
             case "Computer Accessories":

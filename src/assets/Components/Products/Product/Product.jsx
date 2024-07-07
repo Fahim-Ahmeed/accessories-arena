@@ -54,7 +54,7 @@ console.log(item)
 const handleDelete = async (productId) => {
   console.log(productId)
   try {
-    const response = await axios.delete(`https://accessories-arena-server.onrender.com/api/products/${productId}`);
+    const response = await axios.delete(`http://localhost:5000/api/products/${productId}`);
     navigate("/products")
     console.log(response.data);
   } catch (error) {
@@ -64,10 +64,11 @@ const handleDelete = async (productId) => {
 
   return (
     <>
-      <div className="card w-full bg-gray-200 text-black shadow-xl">
+    
+    <div className="card w-full bg-gray-200 text-black shadow-xl">
         <figure className="px-10 pt-10">
           <img
-            src={`https://accessories-arena-server.onrender.com/${images}`}
+            src={`http://localhost:5000/${images}`}
             alt="Accessory"
             className="rounded-xl"
           />
@@ -76,6 +77,7 @@ const handleDelete = async (productId) => {
           <h2 className="card-title">{brand}</h2>
           <h2 className="card-title">{name}</h2>
           <p>{price}</p>
+          <Link to={`/productDetails/${_id}`}>
           <div className="card-actions">
             <label
               htmlFor={`modal_${_id}`} // Unique ID for each product modal
@@ -85,6 +87,7 @@ const handleDelete = async (productId) => {
               Show Details
             </label>
           </div>
+          </Link>
         </div>
         <div className="flex justify-between m-8">
           {role === "admin" ? (
@@ -133,34 +136,6 @@ const handleDelete = async (productId) => {
             </div>
           )}
         </div>
-      </div>
-
-      {/* Modal */}
-      <input type="checkbox" id={`modal_${_id}`} className="modal-toggle" />
-      <div className="modal" role="dialog">
-        <div className="modal-box">
-          {selectedProduct && (
-            <div className="card lg:card-side bg-base-100 shadow-xl">
-              <figure>
-                <img
-                  src={`https://accessories-arena-server.onrender.com/${selectedProduct.images}`}
-                  alt={selectedProduct.name}
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{selectedProduct.name}</h2>
-                <p>{selectedProduct.description}</p>
-                <p>Price: ${selectedProduct.price}</p>
-                <p>Brand: {selectedProduct.brand}</p>
-                <p>Category: {selectedProduct.category}</p>
-                <p>Stock Quantity: {selectedProduct.stockQuantity}</p>
-              </div>
-            </div>
-          )}
-        </div>
-        <label className="modal-backdrop" htmlFor={`modal_${_id}`}>
-          Close
-        </label>
       </div>
     </>
   );

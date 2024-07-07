@@ -18,6 +18,12 @@ import ProductContext from "./assets/Components/Context/ProductContext";
 import Cart from "./assets/Components/Cart/Cart";
 import UpdateProduct from "./assets/Components/Dashboard/AdminDashboard/UpdateProduct/UpdateProduct";
 import RepairService from "./assets/Components/RepairService/RepairService";
+import SingleProduct from "./assets/Components/Products/Product/SingleProduct";
+import AddressForm from "./assets/Components/AddressForm/AddressForm";
+import PaymentSuccess from "./assets/Components/Products/Product/PaymentSuccess";
+import PaymentFail from "./assets/Components/Products/Product/PaymentFail";
+import Checkout from "./assets/Components/Products/checkout";
+import ContactInformation from "./assets/Components/Contact/ContactInformation";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -29,17 +35,24 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
+        path: "payment/success/:tranId",
+        element: <PaymentSuccess></PaymentSuccess>,
+      },
+      {
+        path: "payment/fail/:tranId",
+        element: <PaymentFail></PaymentFail>,
+      },
+      {
         path: "/contact",
         element: (
-           <PrivateRoute>
-             <Contact></Contact>
-           </PrivateRoute>
+          <PrivateRoute>
+            <Contact></Contact>
+          </PrivateRoute>
         ),
       },
       {
         path: "/Community",
-        element: 
-            <Community></Community>,
+        element: <Community></Community>,
       },
       {
         path: "/login",
@@ -48,6 +61,18 @@ const router = createBrowserRouter([
       {
         path: "/register",
         element: <Register></Register>,
+      },
+      {
+        path: "/contactInformation",
+        element:<ContactInformation></ContactInformation>
+      },
+      {
+        path: "/checkout",
+        element: (
+          <PrivateRoute>
+            <Checkout />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/dashboard",
@@ -67,23 +92,30 @@ const router = createBrowserRouter([
       },
       {
         path: "/repairService",
-        element :<RepairService></RepairService>
+        element: <RepairService></RepairService>,
       },
       {
-        path:`/updateProduct/:id`,
-        element:(
+        path: "/AddressForm",
+        loader: () => fetch(`http://localhost:5000/api/address`),
+        element: <AddressForm />,
+      },
+      {
+        path: `/productDetails/:id`,
+        element: <SingleProduct></SingleProduct>,
+      },
+      {
+        path: `/updateProduct/:id`,
+        element: (
           <PrivateRoute>
-            <UpdateProduct/>
+            <UpdateProduct />
           </PrivateRoute>
         ),
-        loader:({params})=>fetch(`https://accessories-arena-server.onrender.com/api/products/${params.id}`)
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/api/products/${params.id}`),
       },
-      { 
+      {
         path: "/products",
-        loader: () => 
-          fetch(
-            `https://accessories-arena-server.onrender.com/api/products`
-          ),
+        loader: () => fetch(`http://localhost:5000/api/products`),
         element: <Products></Products>,
       },
     ],

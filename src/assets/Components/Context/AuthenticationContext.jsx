@@ -18,6 +18,16 @@ const AuthenticationContext = ({ children }) => {
   const [role, setRole] = useState(null);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const[address,setAddress]=useState({
+    fullName: '',
+    address: '',
+    mobileNumber: '',
+    landmark: '',
+    district: '',
+    city: '',
+    area: ''
+   
+  });
   const notify = (message) => {
     toast(message);
   };
@@ -47,6 +57,9 @@ const AuthenticationContext = ({ children }) => {
 
 },[])
 
+const updateAddress = (newAddress) => {
+  setAddress(newAddress);
+};
 
 useEffect(() => {
   const fetchUserRole = async () => {
@@ -78,7 +91,9 @@ useEffect(() => {
     role,
     setRole
     ,userData,
-    setUserData
+    setUserData,
+    address,
+    updateAddress
   };
   return (
     <Auth.Provider value={authInfo}>

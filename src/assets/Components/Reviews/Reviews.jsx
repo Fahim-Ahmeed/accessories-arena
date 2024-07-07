@@ -42,7 +42,7 @@ const navigate=useNavigate()
           />
         </div>
         <div className="form-group">
-          <label htmlFor="rating">Rating:</label>
+          <label htmlFor="rating">Rating:(out of 5)</label>
           <input
             type="number"
             id="rating"
