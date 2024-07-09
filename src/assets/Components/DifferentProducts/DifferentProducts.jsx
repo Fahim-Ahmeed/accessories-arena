@@ -27,7 +27,7 @@ const DifferentProducts = () => {
         <div className="conaiter mx-auto">
            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4  text-gray-800">
                 <div className="shadow-lg p-4">
-                    <h2 className="text-center text-xl font-bold p-2">Gaming Accessories</h2>
+                    <h2 className="text-center text-2xl font-bold p-2 text-rose-500">Gaming Accessories</h2>
                 <div className=" grid grid-cols-2 h-auto gap-2 justify-items-stretch ">
                 {
                 gameItem.map((item, id) => (
@@ -38,7 +38,7 @@ const DifferentProducts = () => {
             
                 </div>
             <div className="p-4 shadow-lg">
-            <h2 className="text-center text-xl font-bold p-2">Deals in parts</h2>
+            <h2 className="text-center text-2xl font-bold p-2 text-rose-500">Deals in parts</h2>
             <div className=" grid grid-cols-2 h-auto gap-2 justify-items-between ">
             {
                 partsItem.map((item,id)=>(
@@ -49,7 +49,7 @@ const DifferentProducts = () => {
                 </div>
 
                 <div className="p-4 shadow-lg">
-            <h2 className="text-center text-xl font-bold p-2">Refresh your Space</h2>
+            <h2 className="text-center text-2xl font-bold p-2 text-rose-500">Refresh your Space</h2>
             <div className=" grid grid-cols-2 h-auto gap-2 justify-items-between ">
             {
                 spaceItem.map((item,id)=>(
@@ -59,7 +59,7 @@ const DifferentProducts = () => {
            </div>
                 </div>
                 <div className="p-4 shadow-lg">
-                <h2 className="text-center text-xl font-bold p-2">Deals in PCs</h2>
+                <h2 className="text-center text-2xl font-bold p-2 text-rose-500">Deals in PCs</h2>
                 {
                 pcItem.map((item,id)=>(
                     <DifferentProduct key={id} item={item}></DifferentProduct>

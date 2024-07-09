@@ -6,7 +6,7 @@ const CartItem = ({ item, onQuantityChange, handleRemove }) => {
     return <div>Loading...</div>;
   }
 
-  const { _id, brand, image, name, slug, price, quantity,productType
+  const { _id, brand, images, name, slug, price, quantity,productType
   } = item;
 
   const handleQuantityChange = (amount) => {
@@ -20,7 +20,7 @@ const CartItem = ({ item, onQuantityChange, handleRemove }) => {
       <div className="card bg-gray-200 w-96 shadow-xl">
         <figure>
           <img
-            src={image || "path/to/default-image.jpg"}
+            src={images || "path/to/default-image.jpg"}
             alt={name || "Product Image"}
           />
         </figure>

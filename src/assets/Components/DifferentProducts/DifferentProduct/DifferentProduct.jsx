@@ -6,7 +6,7 @@ const DifferentProduct = ({item}) => {
            <Link to="products">
             <div>
                 <img className="" src={img} alt="" />
-                <h4>{name}</h4>
+                <h4 className='text-rose-400 text-xl'> {name}</h4>
             </div>
            </Link>
     );

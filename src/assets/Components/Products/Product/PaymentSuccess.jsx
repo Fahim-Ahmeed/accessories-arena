@@ -6,9 +6,11 @@ const PaymentSuccess = () => {
     const { tranId } = useParams();
 
     return (
-        <div>
-            <h1>Payment Successful</h1>
-            <p>Transaction ID: {tranId}</p>
+        <div className='flex justify-center items-stretch'>
+          <div className='text-3xl text-success self-center '>
+          <h1 className='text-3xl'>Payment Successful</h1>
+          <p>Transaction ID: {tranId}</p>
+          </div>
         </div>
     );
 };

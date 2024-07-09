@@ -6,7 +6,7 @@ const FAQ = () => {
     return (
         <section className="container mx-auto mt-16">
         <div className="text-center  w-3/5 mx-auto">
-          <h2 className="text-gray-900 text-4xl">Frequently Asked Any Question</h2>
+          <h2 className=" text-4xl text-rose-400">Frequently Asked Any Question</h2>
           <p>
 FAQs (Frequently Asked Questions) are a vital part of any website, including Accessory Arena. They serve as a comprehensive guide for visitors, addressing common queries and concerns they might have about the products, services, ordering process, and policies</p>
         </div>

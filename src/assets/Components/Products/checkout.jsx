@@ -45,7 +45,7 @@ const handleBuy=()=>{
       <div className=" mt-10 mb-10 gap-0">
         {address && ( // Check if address exists
           <div className="basis-1/2 grid justify-items-center gap-4 mt-10">
-            <div className="card bg-neutral-300 text-primary-content w-96">
+            <div className="card  text-primary-content font-bold w-96 bg-teal-300	">
               <div className="card-body">
                 <h2 className="card-title">Shipping Address</h2>
                 <p>{address.fullName}</p>
@@ -53,7 +53,7 @@ const handleBuy=()=>{
                 <p>{address.mobileNumber}</p>
               </div>
             </div>
-            <div className="card bg-neutral-300 text-primary-content w-96">
+            <div className="card bg-neutral-300 text-primary-content w-96 font-bold w-96 bg-teal-300">
               <div className="card-body">
                 <h2 className="card-title">Billing Address</h2>
                 <p>{address.fullName}</p>

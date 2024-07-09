@@ -65,7 +65,7 @@ const handleDelete = async (productId) => {
   return (
     <>
     
-    <div className="card w-full bg-gray-200 text-black shadow-xl">
+    <div className="card w-full bg-[#3838b3f9]	 text-gray-200 shadow-xl">
         <figure className="px-10 pt-10">
           <img
             src={`http://localhost:5000/${images}`}
