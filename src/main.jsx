@@ -35,11 +35,11 @@ const router = createBrowserRouter([
         element: <Home></Home>,
       },
       {
-        path: "payment/success/:tranId",
+        path: `payment/success/:tranId`,
         element: <PaymentSuccess></PaymentSuccess>,
       },
       {
-        path: "payment/fail/:tranId",
+        path: `payment/fail/:tranId`,
         element: <PaymentFail></PaymentFail>,
       },
       {
